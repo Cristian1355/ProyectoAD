@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="css/tiny-slider.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Registro de Usuario - EasyBuy</title>
+    <style>
+        .btn-center {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header" style="background-color: rgb(0, 0, 0); color: white;">
+                    <h3 style="text-align: center;" class="card-title">Registro de Usuario</h3>
+                </div>
+                <div class="card-body">
+                    <form action="backend/registro.php" method="POST">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" pattern="[A-Za-z ]+" title="Solo letras y espacios son permitidos" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correoElectronico" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contrasena" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" pattern="\d*" title="Solo números son permitidos" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rol" class="form-label">Rol</label>
+                            <select class="form-control" id="rol" name="rol" required>
+                                <option value="1">Comprador</option>
+                                <option value="2">Vendedor</option>
+                            </select>
+                        </div>
+                        <div class="btn-center">
+                            <button type="submit" class="btn btn-success">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const nombreInput = document.getElementById('nombre');
+        const telefonoInput = document.getElementById('telefono');
+
+        // Función para validar que solo se introduzcan letras y espacios
+        function validarSoloLetras(e) {
+            const charCode = e.charCode || e.keyCode;
+            const char = String.fromCharCode(charCode);
+
+            // Permitir solo letras y espacios
+            if (!/^[A-Za-z ]+$/.test(char) && charCode > 31) {
+                e.preventDefault();
+            }
+        }
+
+        // Función para validar que solo se introduzcan números
+        function validarSoloNumeros(e) {
+            const charCode = e.charCode || e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                e.preventDefault();
+            }
+        }
+
+        nombreInput.addEventListener('keypress', validarSoloLetras);
+        telefonoInput.addEventListener('keypress', validarSoloNumeros);
+    });
+</script>
+</body>
+</html>
+

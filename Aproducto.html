@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="css/tiny-slider.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Añadir Producto - EasyBuy</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="card-title">Añadir Producto</h3>
+                </div>
+                <div class="card-body">
+                    <form action="backend/Aproducto.php" method="POST" enctype="multipart/form-data" id="formProducto">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre del Producto</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precio" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="precio" name="precio" required min="0" step="0.01">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoría</label>
+                            <select class="form-select" id="categoria" name="categoria" required>
+                                <option value="">Seleccione una categoría</option>
+                                <option value="tecnologia">Tecnología</option>
+                                <option value="juguetes">Juguetes</option>
+                                <option value="ropa">Ropa</option>
+                                <option value="accesorios">Accesorios</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imagen" class="form-label">Imagen del Producto</label>
+                            <input type="file" class="form-control" id="imagen" name="imagen" required accept=".jpg, .jpeg, .png, .gif">
+                        </div>
+                        <button type="submit" class="btn btn-dark">Agregar Producto</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/tiny-slider.js"></script>
+<script src="js/custom.js"></script>
+<script>
+    document.getElementById('formProducto').addEventListener('submit', function(event) {
+        var archivoImagen = document.getElementById('imagen').files[0];
+        var tipoImagen = /image.*/;
+
+        if (archivoImagen && archivoImagen.size > 500000) {
+            alert('El tamaño de la imagen debe ser menor a 500KB');
+            event.preventDefault();
+        }
+
+        if (archivoImagen && !archivoImagen.type.match(tipoImagen)) {
+            alert('El formato de la imagen debe ser JPG, JPEG, PNG o GIF');
+            event.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>
+
